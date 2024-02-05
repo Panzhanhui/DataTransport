@@ -2,7 +2,9 @@
 import socket
 import time
 
-status=False
+status = False
+
+
 def send_message(client_socket, message):
     client_socket.send(message.encode('utf-8'))
 
@@ -28,15 +30,15 @@ def test():
             server_address = (server_host, server_port)
             send_message(client_socket, message, server_address)
             if receive_response(client_socket) is '101':
-                status=True
+                status = True
             time.sleep(1)
     except KeyboardInterrupt:
         print("Client stopped.")
     finally:
         client_socket.close()
 
-
-def start(server_host, server_port):
+ 
+def start(server_host, server_port,msg):
 
     if status:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,7 +46,7 @@ def start(server_host, server_port):
             client_socket.connect((server_host, server_port))
 
             while True:
-                message = "Hello, Server!"
+                message = msg
                 send_message(client_socket, message)
                 time.sleep(1)
         except socket.error as e:

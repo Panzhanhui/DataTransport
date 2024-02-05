@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinterdnd2 import TkinterDnD, DND_FILES
 import FileOperator as fo
+import Network as ntk
 
 file_data = None
 
@@ -46,7 +47,7 @@ class Mainwindow:
         fo.labelTag = label_result
 
         # create a transmit button
-        button = tk.Button(window, text="transmit", command=get_entry_text)
+        button = tk.Button(window, text="transmit", command=ntk.start())
         button.pack(pady=10)
 
         window.mainloop()
