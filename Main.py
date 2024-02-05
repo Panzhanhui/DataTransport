@@ -17,6 +17,7 @@ class Mainwindow:
             # label_result.config(text=f'选择的文件路径：{file_path}')
             pass
 
+    
     def onCreate(self):
         global file_data
         # create a window
@@ -43,6 +44,10 @@ class Mainwindow:
 
         # set label_result to labelTag for Show
         fo.labelTag = label_result
+
+        # create a transmit button
+        button = tk.Button(window, text="transmit", command=get_entry_text)
+        button.pack(pady=10)
 
         window.mainloop()
 
