@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinterdnd2 import TkinterDnD, DND_FILES
+import FileOperator as fo
+
 class Mainwindow:
     
     def open_file_dialog(self):
@@ -10,12 +12,19 @@ class Mainwindow:
             pass
 
     def onCreate(self):
+        # create a window
         window = TkinterDnD.Tk()
     
+
         window.drop_target_register(DND_FILES)
+        window.dnd_bind('<<Drop>>', fo.drop)
         # 创建编辑框
         entry = tk.Entry(window, width=30)
         entry.pack(pady=10)
+
+        # create a label
+        label_result = tk.Label(window)
+        label_result.pack(pady=10)
 
         Mainwindow().open_file_dialog()
         window.mainloop()
