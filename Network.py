@@ -16,12 +16,17 @@ def receive_response(client_socket):
         f"Received response from server at {server_address}: {response.decode('utf-8')}")
     return (server_address, response.decode('utf-8'))
 
+def getIP():
+    h='host.txt'
+    with open(h,'r',encoding='utf-8')as f:
+        line=f.readline()
+        return line if line else ''
 
 def recordIP(host):
     h = 'host.txt'
 
     with open(h, 'w', encoding='utf-8') as f:
-        f.write(host)
+        f.write(host,'\n')
 
 
 def test():
