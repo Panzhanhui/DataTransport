@@ -1,4 +1,5 @@
 
+import os
 import socket
 import time
 
@@ -13,7 +14,14 @@ def receive_response(client_socket):
     response, server_address = client_socket.recvfrom(1024)
     print(
         f"Received response from server at {server_address}: {response.decode('utf-8')}")
-    return response.decode('utf-8')
+    return (server_address, response.decode('utf-8'))
+
+
+def recordIP(host):
+    h = 'host.txt'
+
+    with open(h, 'w', encoding='utf-8') as f:
+        f.write(host)
 
 
 def test():
@@ -29,16 +37,18 @@ def test():
             message = 1
             server_address = (server_host, server_port)
             send_message(client_socket, message, server_address)
-            if receive_response(client_socket) is '101':
+            host, msg = receive_response(client_socket)
+            if msg is '101':
                 status = True
+                recordIP(host)
             time.sleep(1)
     except KeyboardInterrupt:
         print("Client stopped.")
     finally:
         client_socket.close()
 
- 
-def start(server_host, server_port,msg):
+
+def start(server_host, server_port, msg):
 
     if status:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

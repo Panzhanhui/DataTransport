@@ -46,6 +46,8 @@ class Mainwindow:
         # set label_result to labelTag for Show
         fo.labelTag = label_result
 
+        # test access
+        ntk.test()
         # create a transmit button
         button = tk.Button(window, text="transmit", command=ntk.start())
         button.pack(pady=10)
